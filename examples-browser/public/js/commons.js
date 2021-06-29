@@ -91,6 +91,10 @@ function renderNavBar(navbarId, exampleUri) {
     {
       uri: 'batch_face_recognition',
       name: 'Batch Face Recognition'
+    },
+    {
+      uri: 'question_1',
+      name: 'Question_1'
     }
   ]
 

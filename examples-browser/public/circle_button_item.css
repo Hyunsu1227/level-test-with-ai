@@ -1,0 +1,15 @@
+.item {
+    background-color:#86efef;
+    width: 6%;
+    padding-bottom: 6%;
+    border-radius:50%;
+    margin:0 auto;
+}
+
+.fit-picture {
+    width: 1000px;
+}
+
+.width_full {
+    width: 100%;
+}
