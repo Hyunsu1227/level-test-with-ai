@@ -1,11 +1,12 @@
 {
   "scripts": {
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "author": "justadudewhohacks",
   "license": "MIT",
   "dependencies": {
     "express": "^4.17.1",
+    "nodemon": "^2.0.7",
     "request": "^2.88.2"
   }
 }
