@@ -95,6 +95,22 @@ function renderNavBar(navbarId, exampleUri) {
     {
       uri: 'question_1',
       name: 'Question_1'
+    },
+    {
+      uri: 'question_2',
+      name: 'Question_2'
+    },
+    {
+      uri: 'question_3',
+      name: 'Question_3'
+    },
+    {
+      uri: 'question_4',
+      name: 'Question_4'
+    },
+    {
+      uri: 'question_6',
+      name: 'Question_6'
     }
   ]
 

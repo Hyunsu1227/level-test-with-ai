@@ -3,6 +3,25 @@
     width: 6%;
     padding-bottom: 6%;
     border-radius:50%;
+    opacity: 0;
+    float: left;
+}
+
+.item2 {
+    background-color:#86efef;
+    width: 10%;
+    padding-bottom: 10%;
+    border-radius:50%;
+    opacity: 0;
+    float: left;
+}
+
+.item3 {
+    background-color:#86efef;
+    width: 6.85%;
+    padding-bottom: 6.85%;
+    border-radius:50%;
+    opacity: 0;
     float: left;
 }
 

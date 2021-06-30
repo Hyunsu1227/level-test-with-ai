@@ -3,7 +3,7 @@ $(document).ready(function () {
         var img_height = $(this).height();
         console.log(img_height)
 
-        $(".item").each(function(){
+        $(".item, .item2, .item3").each(function(){
             var top = $(this).position().top;
             var height = $(this).outerHeight();
             $(this).css('bottom', height*2.6);
@@ -13,22 +13,22 @@ $(document).ready(function () {
 })
 
 function fade_in_out_circle(){
-    $(".item").click(function(){
-        if($(this).css("Opacity") == "1"){
+    $(".item, .item2, .item3").click(function(){
+        if($(this).css("Opacity") == "0.6"){
             console.log("visibility")
             $(this).animate({opacity: "0"}, 500);
         }
         else{
             console.log("hidden")
-            $(this).animate({opacity: "1"}, 500);
+            $(this).animate({opacity: "0.6"}, 500);
         }
     })
 }
 
 function check_the_number_of_circles(){
     var num = 0;
-    $(".item").each(function(){
-        if($(this).css("Opacity") == "1"){
+    $(".item, .item2, .item3").each(function(){
+        if($(this).css("Opacity") == "0.6"){
             num += 1;
         }
     })
