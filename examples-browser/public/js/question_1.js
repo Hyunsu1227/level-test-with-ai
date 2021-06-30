@@ -25,3 +25,12 @@ function fade_in_out_circle(){
     })
 }
 
+function check_the_number_of_circles(){
+    var num = 0;
+    $(".item").each(function(){
+        if($(this).css("Opacity") == "1"){
+            num += 1;
+        }
+    })
+    alert("원의 개수는 " + num + "개 입니다.")
+}
