@@ -4,6 +4,11 @@ const { get } = require('request')
 
 const app = express()
 
+const mongoose = require('mongoose')
+const fileUpload = require('express-fileupload')
+app.use(fileUpload())
+const homeController = require('./controllers/home')
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
@@ -14,6 +19,15 @@ app.use(express.static(path.join(__dirname, '../images')))
 app.use(express.static(path.join(__dirname, '../media')))
 app.use(express.static(path.join(__dirname, '../weights')))
 app.use(express.static(path.join(__dirname, '../dist')))
+
+// mongoose.connect('mongodb://localhost/my_database', {
+//     useUnifiedTopology: true,
+//     useNewUrlParser: true,
+//     useCreateIndex: true    
+// });
+
+const ejs = require('ejs')
+app.set('view engine', 'ejs')
 
 app.get('/', (req, res) => res.redirect('/face_detection'))
 app.get('/face_detection', (req, res) => res.sendFile(path.join(viewsDir, 'faceDetection.html')))
@@ -34,12 +48,16 @@ app.get('/bbt_face_recognition', (req, res) => res.sendFile(path.join(viewsDir, 
 app.get('/batch_face_landmarks', (req, res) => res.sendFile(path.join(viewsDir, 'batchFaceLandmarks.html')))
 app.get('/batch_face_recognition', (req, res) => res.sendFile(path.join(viewsDir, 'batchFaceRecognition.html')))
 
+
 app.get('/question_1', (req, res) => res.sendFile(path.join(viewsDir, 'question_1.html')))
 app.get('/question_2', (req, res) => res.sendFile(path.join(viewsDir, 'question_2.html')))
 app.get('/question_3', (req, res) => res.sendFile(path.join(viewsDir, 'question_3.html')))
 app.get('/question_4', (req, res) => res.sendFile(path.join(viewsDir, 'question_4.html')))
 
 app.get('/question_6', (req, res) => res.sendFile(path.join(viewsDir, 'question_6.html')))
+
+app.get('/home', (req, res) => res.render('home'));
+app.get('/home', (req, res) => res.render('home'));
 
 app.post('/fetch_external_image', async (req, res) => {
   const { imageUrl } = req.body
