@@ -20,7 +20,7 @@ db.once('open', function() {
 });
 
 // 8. Student 객체를 new 로 생성해서 값을 입력
-var newQuestion = new ShortAnswerQuestion({description:'대충 문제 내용 ㅇㅇ', answer:'대충 정답', image:'대충 이미지임!'});
+var newQuestion = new ShortAnswerQuestion({description:'대충 문제 내용 ㅇㅇ 3', answer:'대충 정답', image:'대충 이미지임!'});
 
 // 9. 데이터 저장
 newQuestion.save(function(error, data){

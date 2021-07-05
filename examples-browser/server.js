@@ -7,7 +7,7 @@ const app = express()
 const mongoose = require('mongoose')
 const fileUpload = require('express-fileupload')
 app.use(fileUpload())
-const homeController = require('./controllers/home')
+const ShortAnswerQuestionController = require('./controllers/ShortAnswerQuestion')
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -20,11 +20,11 @@ app.use(express.static(path.join(__dirname, '../media')))
 app.use(express.static(path.join(__dirname, '../weights')))
 app.use(express.static(path.join(__dirname, '../dist')))
 
-// mongoose.connect('mongodb://localhost/my_database', {
-//     useUnifiedTopology: true,
-//     useNewUrlParser: true,
-//     useCreateIndex: true    
-// });
+mongoose.connect('mongodb://localhost/my_database', {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+    useCreateIndex: true    
+});
 
 const ejs = require('ejs')
 app.set('view engine', 'ejs')
@@ -57,7 +57,7 @@ app.get('/question_4', (req, res) => res.sendFile(path.join(viewsDir, 'question_
 app.get('/question_6', (req, res) => res.sendFile(path.join(viewsDir, 'question_6.html')))
 
 app.get('/home', (req, res) => res.render('home'));
-app.get('/home', (req, res) => res.render('home'));
+app.get('/ShortAnswerQuestion', ShortAnswerQuestionController);
 
 app.post('/fetch_external_image', async (req, res) => {
   const { imageUrl } = req.body
