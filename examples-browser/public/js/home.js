@@ -5,6 +5,7 @@ $(document).ready(function () {
 
 var question;
 
+
 function getShortAnswerQuestion(){
     $.ajax({
         type: 'GET',
@@ -20,6 +21,9 @@ function getShortAnswerQuestion(){
             if(data.length > 0){
                 $(".main").append(`<h2>${data[0].description}</h2>`)
             }
+            if(data.length == 0){
+                console.log('no data');
+            }
         },
         error: function (request, status, error) {
             alert('통신 실패')
@@ -30,5 +34,17 @@ function getShortAnswerQuestion(){
 function navClick(i){
     // console.log(question[i]);
     $(".main").empty();
+    
+    $(".main").append(`
+        <div style="position: absolute; width: 1260px; height: 880px;">
+            <div style="background: chartreuse; margin-top: 50px; text-align: center;">
+                <h1>Question ${i+1}</h1>
+            </div>
+            <div style="background: chartreuse; margin-top: 5px; width: 1260px; height: 300px; text-align: center;">
+                <img id="question" src="${i+1}.png">
+            </div>
+            <p>This sidenav is always shown.</p>
+        </div>
+    `)
     $(".main").append(`<h2>${question[i].description}</h2>`)
 }
