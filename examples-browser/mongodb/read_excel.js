@@ -1,3 +1,4 @@
+
 // @breif xlsx 모듈추출
 
 const xlsx = require( "xlsx" );
@@ -20,8 +21,20 @@ const firstSheet = excelFile.Sheets[sheetName];       // @details 시트의 제�
 
 // @details 엑셀 파일의 첫번째 시트를 읽어온다.
 
-const jsonData = xlsx.utils.sheet_to_json( firstSheet, { defval : "" } );
+const jsonData = {};
+let i = excelFile.SheetNames.length;
+
+while (i--) {
+    const sheetname = excelFile.SheetNames[i];
+    jsonData[sheetname] = xlsx.utils.sheet_to_json(excelFile.Sheets[sheetname]);
+    console.log(sheetname);
+}
+
+// console.log(jsonData)
+console.log(jsonData['Sheet1'][0]['문제설명']);
 
 
 
-console.log( jsonData );
+
+
+

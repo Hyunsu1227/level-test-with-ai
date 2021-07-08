@@ -1,9 +1,41 @@
 const ShortAnswerQuestion = require('../models/ShortAnswerQuestion.js')
 // 1. mongoose 모듈 가져오기
 var mongoose = require('mongoose');
+
+
+
+// @breif xlsx 모듈추출
+
+const xlsx = require( "xlsx" );
+
+
+
+// @files 엑셀 파일을 가져온다.
+
+const excelFile = xlsx.readFile( "question.xlsx" );
+
+
+
+// @breif 엑셀 파일의 첫번째 시트의 정보를 추출
+
+const sheetName = excelFile.SheetNames[0];          // @details 첫번째 시트 정보 추출
+
+const firstSheet = excelFile.Sheets[sheetName];       // @details 시트의 제목 추출
+
+
+
+// @details 엑셀 파일의 첫번째 시트를 읽어온다.
+
+const jsonData = xlsx.utils.sheet_to_json( firstSheet, { defval : "" } );
+
+
+
+console.log( jsonData["독해력"] );
+
+
 // 2. testDB 세팅
 // mongoose.connect('mongodb://localhost:27017/testDB');
-mongoose.connect('mongodb://localhost/my_database', {
+mongoose.connect('mongodb://localhost:27017/test', {
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useCreateIndex: true    
@@ -19,9 +51,47 @@ db.once('open', function() {
     console.log('Connected!');
 });
 
-// 8. Student 객체를 new 로 생성해서 값을 입력
-var newQuestion = new ShortAnswerQuestion({description:'대충 문제 내용 ㅇㅇ 3', answer:'대충 정답', image:'대충 이미지임!'});
 
+// 8. Student 객체를 new 로 생성해서 값을 입력
+
+
+console.log(jsonData[0]['문제설명']);
+
+for(var i=0;i<jsonData.length;i++){
+    var newQuestion = new ShortAnswerQuestion(
+        {문제설명: `${jsonData[i]['문제설명']}`,
+            그림: `${jsonData[i]['그림']}`,
+            보기1: `${jsonData[i]['보기1']}`,
+            보기2: `${jsonData[i]['보기2']}`,
+            보기3: `${jsonData[i]['보기3']}`,
+            보기4: `${jsonData[i]['보기4']}`,
+            보기5: `${jsonData[i]['보기5']}`,
+            정답: `${jsonData[i]['정답']}`,
+            학년: `${jsonData[i]['학년']}`,
+            학기: `${jsonData[i]['학기']}`,
+            단원: `${jsonData[i]['단원']}`,
+            유형: `${jsonData[i]['유형']}`,
+            난이도: `${jsonData[i]['난이도']}`,
+            소요시간: `${jsonData[i]['소요시간']}`,
+            개념이해력: `${jsonData[i]['개념이해력']}`,
+            개념적용력: `${jsonData[i]['개념적용력']}`,
+            개념응용력: `${jsonData[i]['개념응용력']}`,
+            추론력: `${jsonData[i]['추론력']}`,
+            독해력: `${jsonData[i]['독해력']}`});
+
+            newQuestion.save(function(error, data){
+                if(error){
+                    console.log(error);
+                }else{
+                    console.log('Saved!')
+                }
+            });
+}
+
+
+// var newQuestion = new ShortAnswerQuestion({description:'대충 문제 내용 ㅇㅇ 3', answer:'대충 정답', image:'대충 이미지임!'});
+
+/*
 // 9. 데이터 저장
 newQuestion.save(function(error, data){
     if(error){
@@ -30,7 +100,10 @@ newQuestion.save(function(error, data){
         console.log('Saved!')
     }
 });
+*/
 
+
+/*
 // 10. Student 레퍼런스 전체 데이터 가져오기
 ShortAnswerQuestion.find(function(error, questions){
     console.log('--- Read all ---');
@@ -40,6 +113,7 @@ ShortAnswerQuestion.find(function(error, questions){
         console.log(questions);
     }
 })
+*/
 
 // // 11. 특정 아이디값 가져오기
 // Student.findOne({_id:'585b777f7e2315063457e4ac'}, function(error,student){

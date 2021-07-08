@@ -19,7 +19,7 @@ function getShortAnswerQuestion(){
                 $(".sidenav").append(`<a href="#" onClick="navClick(${i})">${i+1}</a>`)
             }
             if(data.length > 0){
-                $(".main").append(`<h2>${data[0].description}</h2>`)
+                $(".main").append(`<h2>${data[0]['문제설명']}</h2>`)
             }
             if(data.length == 0){
                 console.log('no data');
@@ -46,5 +46,5 @@ function navClick(i){
             <p>This sidenav is always shown.</p>
         </div>
     `)
-    $(".main").append(`<h2>${question[i].description}</h2>`)
+    $(".main").append(`<h2>${question[i]['문제설명']}</h2>`)
 }
