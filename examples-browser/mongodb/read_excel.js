@@ -1,3 +1,4 @@
+
 // @breif xlsx 모듈추출
 
 const xlsx = require( "xlsx" );
@@ -6,7 +7,7 @@ const xlsx = require( "xlsx" );
 
 // @files 엑셀 파일을 가져온다.
 
-const excelFile = xlsx.readFile( "question.xlsx" );
+const excelFile = xlsx.readFile( "소요시간.xlsx" );
 
 
 
@@ -20,8 +21,20 @@ const firstSheet = excelFile.Sheets[sheetName];       // @details 시트의 제�
 
 // @details 엑셀 파일의 첫번째 시트를 읽어온다.
 
-const jsonData = xlsx.utils.sheet_to_json( firstSheet, { defval : "" } );
+const jsonData = {};
+let i = excelFile.SheetNames.length;
+
+while (i--) {
+    const sheetname = excelFile.SheetNames[i];
+    jsonData[sheetname] = xlsx.utils.sheet_to_json(excelFile.Sheets[sheetname]);
+    console.log(sheetname);
+}
+
+// console.log(jsonData)
+console.log(jsonData['문제집형 DB']);
 
 
 
-console.log( jsonData );
+
+
+
