@@ -36,12 +36,12 @@ function navClick(i){
     $(".main").empty();
     
     $(".main").append(`
-        <div style="position: absolute; width: 1260px; height: 880px;">
+        <div style="position: absolute; width: 630x; height: 880px;">
             <div style="background: chartreuse; margin-top: 50px; text-align: center;">
                 <h1>Question ${i+1}</h1>
             </div>
-            <div style="background: chartreuse; margin-top: 5px; width: 1260px; height: 300px; text-align: center;">
-                <img id="question" src="${i+1}.png">
+            <div style="background: chartreuse; margin-top: 5px; width: 630px; height: 300px; text-align: center;">
+                <img id="question" src="3.1/${i+1}.png">
             </div>
             <p>This sidenav is always shown.</p>
         </div>

@@ -7,7 +7,7 @@ const xlsx = require( "xlsx" );
 
 // @files 엑셀 파일을 가져온다.
 
-const excelFile = xlsx.readFile( "question.xlsx" );
+const excelFile = xlsx.readFile( "소요시간.xlsx" );
 
 
 
@@ -31,7 +31,7 @@ while (i--) {
 }
 
 // console.log(jsonData)
-console.log(jsonData['Sheet1'][0]['문제설명']);
+console.log(jsonData['문제집형 DB']);
 
 
 

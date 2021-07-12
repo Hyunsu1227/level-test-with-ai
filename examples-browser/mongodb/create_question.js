@@ -12,13 +12,13 @@ const xlsx = require( "xlsx" );
 
 // @files 엑셀 파일을 가져온다.
 
-const excelFile = xlsx.readFile( "question.xlsx" );
+const excelFile = xlsx.readFile( "소요시간.xlsx" );
 
 
 
 // @breif 엑셀 파일의 첫번째 시트의 정보를 추출
 
-const sheetName = excelFile.SheetNames[0];          // @details 첫번째 시트 정보 추출
+const sheetName = excelFile.SheetNames[4];          // @details 첫번째 시트 정보 추출
 
 const firstSheet = excelFile.Sheets[sheetName];       // @details 시트의 제목 추출
 
@@ -59,13 +59,8 @@ console.log(jsonData[0]['문제설명']);
 
 for(var i=0;i<jsonData.length;i++){
     var newQuestion = new ShortAnswerQuestion(
-        {문제설명: `${jsonData[i]['문제설명']}`,
-            그림: `${jsonData[i]['그림']}`,
-            보기1: `${jsonData[i]['보기1']}`,
-            보기2: `${jsonData[i]['보기2']}`,
-            보기3: `${jsonData[i]['보기3']}`,
-            보기4: `${jsonData[i]['보기4']}`,
-            보기5: `${jsonData[i]['보기5']}`,
+        {
+            사진: `${jsonData[i]['사진']}`,
             정답: `${jsonData[i]['정답']}`,
             학년: `${jsonData[i]['학년']}`,
             학기: `${jsonData[i]['학기']}`,
@@ -77,7 +72,9 @@ for(var i=0;i<jsonData.length;i++){
             개념적용력: `${jsonData[i]['개념적용력']}`,
             개념응용력: `${jsonData[i]['개념응용력']}`,
             추론력: `${jsonData[i]['추론력']}`,
-            독해력: `${jsonData[i]['독해력']}`});
+            독해력: `${jsonData[i]['독해력']}`,
+            해결책모색력: `${jsonData[i]['해결책모색력']}`});
+            
 
             newQuestion.save(function(error, data){
                 if(error){
