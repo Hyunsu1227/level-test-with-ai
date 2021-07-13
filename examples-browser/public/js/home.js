@@ -22,7 +22,7 @@ function getShortAnswerQuestion(){
             }
 
             grading();
-            timer();
+            timer(data.length);
         },
         error: function (request, status, error) {
             alert('통신 실패')
@@ -31,7 +31,13 @@ function getShortAnswerQuestion(){
 }
 
 function navClick(i){
-    // console.log(question[i]);
+    out_time = time;
+    question_timer[question_num - 1] = question_timer[question_num - 1] + in_time - out_time;
+    in_time = time;
+    question_num = i + 1;
+
+    console.log(question_timer);
+
     $(".main").empty();
     
     $(".main").append(`

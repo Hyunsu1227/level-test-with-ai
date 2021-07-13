@@ -1,5 +1,14 @@
-function timer(){
-    var time = 600; //기준시간 작성
+var time = 600; //기준시간 작성
+var question_num = 1; // 문제 번호
+var in_time = 600; // 들어온 시간
+var out_time = 600; // 나간 시간
+var question_timer = [];
+
+function timer(num_questions){
+    for(var i=0;i<num_questions;i++){
+        question_timer.push(0);
+    }
+    console.log(question_timer);
 	var min = ""; //분
 	var sec = ""; //초
 
