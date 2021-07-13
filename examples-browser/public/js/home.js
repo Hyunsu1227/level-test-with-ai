@@ -2,9 +2,6 @@ $(document).ready(function () {
     getShortAnswerQuestion();
 })
 
-var question;
-
-
 function getShortAnswerQuestion(){
     $.ajax({
         type: 'GET',
@@ -23,6 +20,9 @@ function getShortAnswerQuestion(){
             if(data.length == 0){
                 console.log('no data');
             }
+
+            grading();
+            timer();
         },
         error: function (request, status, error) {
             alert('통신 실패')

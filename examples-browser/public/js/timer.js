@@ -1,7 +1,3 @@
-$(document).ready(function () {
-    timer();
-})
-
 function timer(){
     var time = 600; //기준시간 작성
 	var min = ""; //분
