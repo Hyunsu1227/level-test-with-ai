@@ -20,7 +20,7 @@ app.use(express.static(path.join(__dirname, '../media')))
 app.use(express.static(path.join(__dirname, '../weights')))
 app.use(express.static(path.join(__dirname, '../dist')))
 
-mongoose.connect('mongodb://localhost/my_database', {
+mongoose.connect('mongodb://localhost:27017/test', {
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useCreateIndex: true    
@@ -48,6 +48,7 @@ app.get('/bbt_face_recognition', (req, res) => res.sendFile(path.join(viewsDir, 
 app.get('/batch_face_landmarks', (req, res) => res.sendFile(path.join(viewsDir, 'batchFaceLandmarks.html')))
 app.get('/batch_face_recognition', (req, res) => res.sendFile(path.join(viewsDir, 'batchFaceRecognition.html')))
 
+app.get('/choice', (req, res) => res.sendFile(path.join(viewsDir, 'choice.html')))
 
 app.get('/question_1', (req, res) => res.sendFile(path.join(viewsDir, 'question_1.html')))
 app.get('/question_2', (req, res) => res.sendFile(path.join(viewsDir, 'question_2.html')))

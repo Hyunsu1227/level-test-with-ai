@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    getShortAnswerQuestion();
+  getShortAnswerQuestion()
 })
 
 $(document).ready(function () {
@@ -17,11 +17,18 @@ function getShortAnswerQuestion(){
         dataType: 'JSON',
         success: function (data) {  
             question = data;
-            console.log(data);
+            // 페이지간 데이터 전송 되는지?
+           
+            var testInfo = localStorage.getItem("testInfo")
+            console.log(testInfo)
+
+
+            //console.log(data);
             for(var i=0;i<data.length;i++){
-                console.log(data[i]);
+                //console.log(data[i]);
                 $(".sidenav").append(`<a href="#" onClick="navClick(${i})">${i+1}</a>`)
             }
+            
             navClick(0);
         
             for(var i=0;i<data.length;i++){
@@ -134,13 +141,14 @@ function navClick(i){
 function submit(){
     for (var i=0; i < question.length; i++){
     	if (question[i]['정답'] == answerForSubmit[i]){
-            console.log(i+' 정답')
+            console.log((i+1)+' 정답')
         }
         else{
-            console.log(i+ '오답')
+            console.log((i+1)+ '오답')
         } 
     }
-
 }
+
+
 
 
