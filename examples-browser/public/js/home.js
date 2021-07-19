@@ -17,7 +17,7 @@ $(document).ready(function () {
 function getShortAnswerQuestion() {
     $.ajax({
         type: 'GET',
-        url: 'ShortAnswerQuestion',
+        url: 'QuestionSelection',
         dataType: 'JSON',
         success: function (data) {
             question = data;

@@ -7,7 +7,7 @@ const app = express()
 const mongoose = require('mongoose')
 const fileUpload = require('express-fileupload')
 app.use(fileUpload())
-const ShortAnswerQuestionController = require('./controllers/ShortAnswerQuestion')
+const QuestionSelectionController = require('./controllers/QuestionSelection')
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -58,7 +58,7 @@ app.get('/question_4', (req, res) => res.sendFile(path.join(viewsDir, 'question_
 app.get('/question_6', (req, res) => res.sendFile(path.join(viewsDir, 'question_6.html')))
 
 app.get('/home', (req, res) => res.render('home'));
-app.get('/ShortAnswerQuestion', ShortAnswerQuestionController);
+app.get('/QuestionSelection', QuestionSelectionController);
 
 app.post('/fetch_external_image', async (req, res) => {
   const { imageUrl } = req.body

@@ -1,12 +1,14 @@
 const ShortAnswerQuestion = require('../models/ShortAnswerQuestion.js')
+const SubjectiveAnswerQuestion = require('../models/SubjectiveAnswerQuestion.js')
+
 
 module.exports = async (req, res) => {
     var selectedGrade = "3";
     var selectedSemester = "1";
     var selectedMidFinal = "mid";
 
-    var selectedQuestionNum = 40;
-    var selectedTestLevel = 5; // 1,2,3,4,5 -> 1 이 가장 쉬움
+    var selectedQuestionNum = 20;
+    var selectedTestLevel = 1; // 1,2,3,4,5 -> 1 이 가장 쉬움
     var tableIndex = (selectedTestLevel - 1) * 3 + selectedQuestionNum/10 - 2;
 
     var arr = [ 
@@ -185,11 +187,50 @@ module.exports = async (req, res) => {
                 }
             }
             else { // 주관식
+                if (arr[tableIndex][j][i] != 0) { // 0이 아닌 값일 때만 DB에 데이터 요청
+                    var question_level = "0"; // 난이도
+                    if (i < 2) {
+                        question_level = String(i + 1);
+                    } else if (i >= 2 && i <= 4) {
+                        question_level = "3";
+                    } else if (i >= 5 && i <= 7) {
+                        question_level = "4";
+                    } else {
+                        question_level = "5";
+                    }
 
+                    var unit; // 단원
+                    if (selectedMidFinal == 'mid') {
+                        unit = 1;
+                    } else if (selectedMidFinal == 'final') {
+                        unit = 4;
+                    }
+
+                    var condition = {
+                        "학년": selectedGrade,
+                        "학기": selectedSemester,
+                        "난이도": question_level,
+                        "단원": String(unit + Math.floor((j / 2)))
+                    }
+                    if(i%3 == 0 && i>0){
+                        condition["독해력"] = "0"
+                    }
+                    const question = await SubjectiveAnswerQuestion.find(condition);
+                    console.log(question)
+                    
+                    // 랜덤으로 추출하도록 수정 요
+                    for(var k=0;k<arr[tableIndex][j][i];k++){
+                        questions.push(question[k]);
+                        if(question[k] == undefined){
+                            console.log(condition)
+                        }
+                    }
+                }
             }
         }
     }
-    console.log(questions)
+
+    // console.log(questions)
 
     // var condition = {
     //     "학년":selectedGrade, 
@@ -197,9 +238,9 @@ module.exports = async (req, res) => {
     //     "난이도":"1",
     // }
     // condition['단원'] = "1";
-    // questions = await ShortAnswerQuestion.find(condition);
+    // questions = await SubjectiveAnswerQuestion.find(condition);
 
     // console.log(questions)
-    // console.log(short_answer_question)
+
     res.send(questions)
 }

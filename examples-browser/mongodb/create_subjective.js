@@ -22,7 +22,7 @@ const excelFile = xlsx.readFile( "소요시간.xlsx" );
 // const sheetName = excelFile.SheetNames[4];          // @details 첫번째 시트 정보 추출
 
 // const firstSheet = excelFile.Sheets[sheetName];       // @details 시트의 제목 추출
-const firstSheet = excelFile.Sheets['3.1.1주'];       // @details 시트의 제목 추출
+const firstSheet = excelFile.Sheets['3.1.3주'];       // @details 시트의 제목 추출
 
 
 // @details 엑셀 파일의 첫번째 시트를 읽어온다.
