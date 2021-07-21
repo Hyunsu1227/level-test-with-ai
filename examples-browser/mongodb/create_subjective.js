@@ -1,33 +1,19 @@
-const SubjectiveAnswerQuestion = require('../models/SubjectiveAnswerQuestion.js')
+// 주관식 문제를 excel에서 읽어와 mongodb에 저장하는 코드
+
+const SubjectiveAnswerQuestion = require('../models/SubjectiveAnswerQuestion.js') // 주관식 문제 스키마를 불러옴
 
 // 1. mongoose 모듈 가져오기
 var mongoose = require('mongoose');
 
-
-
 // @breif xlsx 모듈추출
-
 const xlsx = require( "xlsx" );
 
-
-
 // @files 엑셀 파일을 가져온다.
+const excelFile = xlsx.readFile( "소요시간.xlsx" ); // 문제가 저장된 엑셀 파일을 객체화
+ 
+const firstSheet = excelFile.Sheets['3.1.3주'];       // 3.1.3주 시트를 불러옴
 
-const excelFile = xlsx.readFile( "소요시간.xlsx" );
-
-
-
-// @breif 엑셀 파일의 첫번째 시트의 정보를 추출
-
-// const sheetName = excelFile.SheetNames[4];          // @details 첫번째 시트 정보 추출
-
-// const firstSheet = excelFile.Sheets[sheetName];       // @details 시트의 제목 추출
-const firstSheet = excelFile.Sheets['3.1.3주'];       // @details 시트의 제목 추출
-
-
-// @details 엑셀 파일의 첫번째 시트를 읽어온다.
-
-const jsonData = xlsx.utils.sheet_to_json( firstSheet, { defval : "" } );
+const jsonData = xlsx.utils.sheet_to_json( firstSheet, { defval : "" } ); // 시트를 json 형태로 저장
 
 // 2. testDB 세팅
 // mongoose.connect('mongodb://localhost:27017/testDB');
@@ -46,12 +32,6 @@ db.on('error', function(){
 db.once('open', function() {
     console.log('Connected!');
 });
-
-
-// 8. Student 객체를 new 로 생성해서 값을 입력
-
-
-console.log(jsonData[0]['문제설명']);
 
 for(var i=0;i<jsonData.length;i++){
     var newQuestion = new SubjectiveAnswerQuestion(
@@ -83,14 +63,11 @@ for(var i=0;i<jsonData.length;i++){
             독해력: `${jsonData[i]['독해력']}`,
             해결책모색력: `${jsonData[i]['해결책모색력']}`});
             
-
             newQuestion.save(function(error, data){
                 if(error){
                     console.log(error);
                 }else{
                     console.log('Saved!')
                 }
-            });
-
-            
+            });  
 }

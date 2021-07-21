@@ -1,3 +1,5 @@
+// 주관식 문제 스키마
+
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
  

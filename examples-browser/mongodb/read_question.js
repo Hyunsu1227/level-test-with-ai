@@ -1,3 +1,5 @@
+// mongodb에 저장된 객관식 문제를 불러와 출력하는 코드
+
 const ShortAnswerQuestion = require('../models/ShortAnswerQuestion.js')
 // 1. mongoose 모듈 가져오기
 var mongoose = require('mongoose');

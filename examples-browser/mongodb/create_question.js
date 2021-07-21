@@ -1,41 +1,28 @@
-const ShortAnswerQuestion = require('../models/ShortAnswerQuestion.js')
+// 객관식 문제를 excel에서 읽어와 mongodb에 저장하는 코드
+
+const ShortAnswerQuestion = require('../models/ShortAnswerQuestion.js') // 객관식 문제 스키마 불러옴
 // 1. mongoose 모듈 가져오기
 var mongoose = require('mongoose');
 
-
-
 // @breif xlsx 모듈추출
-
 const xlsx = require( "xlsx" );
-
-
 
 // @files 엑셀 파일을 가져온다.
 
-const excelFile = xlsx.readFile( "소요시간.xlsx" );
-
-
-
+const excelFile = xlsx.readFile( "소요시간.xlsx" ); // 문제가 저장된 엑셀 파일을 객체화
 // @breif 엑셀 파일의 첫번째 시트의 정보를 추출
 
-// const sheetName = excelFile.SheetNames[4];          // @details 첫번째 시트 정보 추출
-
 // const firstSheet = excelFile.Sheets[sheetName];       // @details 시트의 제목 추출
-const firstSheet = excelFile.Sheets['3.1.1'];       // @details 시트의 제목 추출
+const firstSheet = excelFile.Sheets['3.1.3'];       // 3.1.3 시트를 객체화
 
+// @details 엑셀 파일의 첫번째 시트를 읽어온다. 
+const jsonData = xlsx.utils.sheet_to_json( firstSheet, { defval : "" } ); // 시트를 json 형태로 변형
 
-// @details 엑셀 파일의 첫번째 시트를 읽어온다.
-
-const jsonData = xlsx.utils.sheet_to_json( firstSheet, { defval : "" } );
-
-
-
-console.log( jsonData["독해력"] );
-
+// console.log( jsonData["독해력"] );
 
 // 2. testDB 세팅
 // mongoose.connect('mongodb://localhost:27017/testDB');
-mongoose.connect('mongodb://localhost:27017/test', {
+mongoose.connect('mongodb://localhost:27017/test', { // 경로는 본인이 설정할 것, 없으면 mongo에서 자동으로 생성해줌
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useCreateIndex: true    
@@ -50,12 +37,6 @@ db.on('error', function(){
 db.once('open', function() {
     console.log('Connected!');
 });
-
-
-// 8. Student 객체를 new 로 생성해서 값을 입력
-
-
-console.log(jsonData[0]['문제설명']);
 
 for(var i=0;i<jsonData.length;i++){
     var newQuestion = new ShortAnswerQuestion(
@@ -75,7 +56,6 @@ for(var i=0;i<jsonData.length;i++){
             독해력: `${jsonData[i]['독해력']}`,
             해결책모색력: `${jsonData[i]['해결책모색력']}`});
             
-
             newQuestion.save(function(error, data){
                 if(error){
                     console.log(error);
@@ -84,9 +64,6 @@ for(var i=0;i<jsonData.length;i++){
                 }
             });
 }
-
-
-// var newQuestion = new ShortAnswerQuestion({description:'대충 문제 내용 ㅇㅇ 3', answer:'대충 정답', image:'대충 이미지임!'});
 
 /*
 // 9. 데이터 저장
